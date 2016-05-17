@@ -1,0 +1,5 @@
+Run `sphinx-apidoc -o . ../../sales_taxes' in this directory.
+
+This will generate `modules.rst' and `sales_taxes.rst'.
+
+Then include `modules.rst' in your `index.rst' file.
