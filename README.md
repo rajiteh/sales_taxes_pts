@@ -7,5 +7,5 @@
 * `input.txt` should contain the inputs.
 
 # Tests
-* `PYTHONPATH=$PYTHONPATH:. py.test tests`
+* `PYTHONPATH=$PYTHONPATH:. py.test tests
 

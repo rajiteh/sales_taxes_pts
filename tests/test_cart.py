@@ -130,6 +130,12 @@ class TestCart(object):
         # should be import and basic taxed
         assert cart._cart_items[0].tax == Decimal(3)
 
+        cart = standard_cart()
+        item = product_book(Decimal(10))
+        cart.add_item(item, 2)
+        # accounts for quantities
+        assert cart._cart_items[0].net_total == Decimal(20)
+
     def test__recalculate(self):
         cart = standard_cart()
         p1 = product_taxable(Decimal(10))
