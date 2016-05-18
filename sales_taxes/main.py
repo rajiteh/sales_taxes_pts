@@ -7,6 +7,7 @@ from contextlib import contextmanager
 from sales_taxes.cart import Cart
 from sales_taxes.product import (ProductSource, ProductCategory, Product)
 from sales_taxes.tax_definition import TaxDefinitionFactory
+from sales_taxes.helpers import currencyfy
 import re
 import sys
 
@@ -86,7 +87,7 @@ def parse_order(line):
 
         details = dict(name=name,
                        product_source=product_source,
-                       price=Decimal(m.group('price')).quantize(Decimal('.01'), rounding=ROUND_DOWN),
+                       price=currencyfy(Decimal(m.group('price'))),
                        product_category=fuzzy_categorize(m.group('name')))
     except AttributeError:
         raise Exception("Incorrect input format. Cannot parse.")
@@ -131,5 +132,4 @@ def receipt_printer(cart, output=sys.stdout):
 
 
 if __name__ == '__main__':
-    sys.path.append('../')
     main()

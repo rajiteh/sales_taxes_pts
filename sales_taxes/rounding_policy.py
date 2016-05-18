@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-import decimal
+from decimal import Decimal, ROUND_DOWN
 import math
+from helpers import currencyfy
 
 
 class RoundingPolicyFactory(object):
@@ -18,10 +19,9 @@ class BaseRoundingPolicy(object):
 
 
 class StandardRoundingPolicy(BaseRoundingPolicy):
-    CENTS = decimal.Decimal('0.01')
-    ROUND_OFF = 1 / 0.05
+    ROUND_OFF = Decimal('1') / Decimal('0.05')
 
     def apply(self, value):
-        return decimal.Decimal(
-            math.ceil(float(value) * self.ROUND_OFF) / self.ROUND_OFF)\
-            .quantize(self.CENTS, decimal.ROUND_HALF_DOWN)
+        _r = Decimal(math.ceil(value * self.ROUND_OFF)) / self.ROUND_OFF
+        return currencyfy(_r)
+

@@ -1,13 +1,14 @@
-# Setup
-
-* `pip install -r requirements-dev.txt`
+# Requirements
+* Python version 3 or higher.
+* Tested only on Mac/Linux
 
 # Run
-* `cat input.txt | PYTHONPATH=$PYTHONPATH:. python sales_taxes/main.py`
+* `./run.sh` OR `cat input.txt | PYTHONPATH=$PYTHONPATH:. python3 sales_taxes/main.py`
 * `input.txt` should contain the inputs.
 
 # Tests
-* `PYTHONPATH=$PYTHONPATH:. py.test tests`
+* `pip install -r requirements-dev.txt`
+* `./test.sh` OR `PYTHONPATH=$PYTHONPATH:.:sales_taxes/ py.test tests`
 
 # Design thoughts
 
