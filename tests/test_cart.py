@@ -137,7 +137,7 @@ class TestCart(object):
         assert cart._cart_items[0].net_total == Decimal(20)
 
     def test__recalculate(self):
-        cart = standard_cart()
+        cart = Cart()
         p1 = product_taxable(Decimal(10))
         cart.add_item(p1)
         p2 = product_taxable(Decimal(20))
@@ -148,10 +148,16 @@ class TestCart(object):
         except:
             pass
 
+        try:
+            cart.add_tax_definition(BasicTaxDefinition())
+        except:
+            pass
+
         # it should revert to last cart state
+        assert len(cart._tax_definitions) == 0
         assert len(cart._cart_items) == 1
         assert cart._cart_items[0].product == p1
-        assert cart.get_net_total() == 11
+        assert cart.get_net_total() == 10
 
     def test__cart_item(self):
         cart = standard_cart()

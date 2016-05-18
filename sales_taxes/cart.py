@@ -130,12 +130,14 @@ class Cart(object):
         """
         def _wrapped(self, *args, **kwargs):
             pre_cart_state = deepcopy(self._cart_items)
+            pre_cart_tax = deepcopy(self._tax_definitions)
             try:
                 fn(self, *args, **kwargs)
                 self._calculate_taxes()
             except (AssertionError, NotImplementedError):
                 # TODO: Granular exception handling
                 self._cart_items = pre_cart_state
+                self._tax_definitions = pre_cart_tax
                 raise
         return _wrapped
 
